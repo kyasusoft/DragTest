@@ -19,6 +19,12 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yp2-Qa-cF6">
                                 <rect key="frame" x="45" y="170" width="230" height="230"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.54901960780000003" blue="0.35294117650000001" alpha="0.70999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="8Sy-GA-vNj" appends="YES" id="KgT-1Y-2g5"/>
+                                    <outletCollection property="gestureRecognizers" destination="dnO-jU-PLH" appends="YES" id="vmo-68-pcB"/>
+                                    <outletCollection property="gestureRecognizers" destination="Yyb-X0-6hj" appends="YES" id="x5t-ri-52V"/>
+                                </connections>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gibasa_namida.png" translatesAutoresizingMaskIntoConstraints="NO" id="7LJ-4Z-SRA">
                                 <rect key="frame" x="45" y="170" width="230" height="233"/>
@@ -34,6 +40,24 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="8Sy-GA-vNj">
+                    <connections>
+                        <action selector="pinch:" destination="BYZ-38-t0r" id="E6Y-p4-yJq"/>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="sA2-xn-WD7"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <rotationGestureRecognizer id="dnO-jU-PLH">
+                    <connections>
+                        <action selector="rotation:" destination="BYZ-38-t0r" id="PuK-NT-vW0"/>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="aiM-H8-2pd"/>
+                    </connections>
+                </rotationGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Yyb-X0-6hj">
+                    <connections>
+                        <action selector="pan:" destination="BYZ-38-t0r" id="1jt-35-ZvD"/>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="ahp-uK-NOh"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="296" y="348"/>
         </scene>

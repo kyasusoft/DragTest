@@ -20,27 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // パンジェスチャーをビューに登録
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                       action:@selector(pan:)];
-    pan.delegate = (id)self;
-    [_baseView addGestureRecognizer:pan];
     
-    // 回転ジェスチャをビューに登録
-    UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:self
-                                                                 action:@selector(rotationGesture:)];
-    rotation.delegate = (id)self;
-    [_baseView addGestureRecognizer:rotation];
-    
-    // ピンチジェスチャをビューに登録
-    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self
-                                                           action:@selector(pinchGesture:)];
-    pinch.delegate = (id)self;
-    [_baseView addGestureRecognizer:pinch];
-    
-    _scale = 1.0f;
-    _angle = 0.0f;
+    _angle = 0.0;
+    _scale = 1.0;
 }
 
 // gesture delegate
@@ -49,23 +31,21 @@
     return YES;
 }
 
-// 移動
-- (void)pan:(UIPanGestureRecognizer *)pgr {
+// ピンチジェスチャー
+- (IBAction)pinch:(UIPinchGestureRecognizer *)gesture {
     
-    // ドラッグで移動した距離を取得する
-    CGPoint p = [pgr translationInView:_baseView];
-    // centerポジションを移動させる
-    CGPoint movedPoint = CGPointMake(_baseView.center.x + p.x, _baseView.center.y + p.y);
-    _baseView.center = movedPoint;
-    // ドラッグで移動した距離を初期化しておく
-    [pgr setTranslation:CGPointZero inView:_baseView];
-
-    // imageViewも移動
-    _imageView.center = _baseView.center;
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        // ジェスチャ開始時
+        _currentTransform = _imageView.transform;
+    }
+    // 拡大率取得
+    _scale = gesture.scale;
+    // アフィン変換を適用
+    [self applyAffain];
 }
 
-// 回転
-- (void)rotationGesture:(UIRotationGestureRecognizer*)gesture {
+// ローテーションジェスチャー
+- (IBAction)rotation:(UIRotationGestureRecognizer *)gesture {
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
         // ジェスチャ開始時
@@ -77,23 +57,23 @@
     [self applyAffain];
 }
 
-// 拡大・縮小
-- (void)pinchGesture: (UIPinchGestureRecognizer *)gesture {
+// パンジェスチャー
+- (IBAction)pan:(UIPanGestureRecognizer *)gesture {
+    // baseViewのcenterポジションを移動させる
+    CGPoint p = [gesture translationInView:_baseView];
+    CGPoint b = _baseView.center;
+    _baseView.center = CGPointMake(b.x + p.x, b.y + p.y);
     
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        // ジェスチャ開始時
-        _currentTransform = _imageView.transform;
-    }
+    // ドラッグで移動した距離を初期化しておく
+    [gesture setTranslation:CGPointZero inView:_baseView];
     
-    // 拡大率取得
-    _scale = gesture.scale;
-    // アフィン変換を適用
-    [self applyAffain];
+    // imageViewも移動
+    _imageView.center = _baseView.center;
 }
 
-// アファイン変換適用
+// アファイン変換を適用
 - (void)applyAffain {
-    // アフィン変換を適用
+
     CGAffineTransform transform = CGAffineTransformConcat(CGAffineTransformConcat(_currentTransform,
                                                                                   CGAffineTransformMakeRotation(_angle)),
                                                           CGAffineTransformMakeScale(_scale, _scale));
@@ -101,7 +81,6 @@
     
     // viewの大きさを更新
     _baseView.frame = _imageView.frame;
-   
 }
 
 // 位置とtransformを保存

@@ -16,5 +16,8 @@ UIGestureRecognizerDelegate
 @property (weak, nonatomic) IBOutlet UIView *baseView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
+- (IBAction)pinch:(id)sender;
+- (IBAction)rotation:(id)sender;
+- (IBAction)pan:(id)sender;
 @end
 
