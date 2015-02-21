@@ -14,6 +14,7 @@
 		4123A5F41A98051500063AB9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4123A5F31A98051500063AB9 /* Images.xcassets */; };
 		4123A5F71A98051500063AB9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4123A5F51A98051500063AB9 /* LaunchScreen.xib */; };
 		4123A6031A98051500063AB9 /* dragTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4123A6021A98051500063AB9 /* dragTestTests.m */; };
+		4123A60F1A9818D900063AB9 /* gibasa_namida.png in Resources */ = {isa = PBXBuildFile; fileRef = 4123A60E1A9818D900063AB9 /* gibasa_namida.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		4123A5FC1A98051500063AB9 /* dragTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dragTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4123A6011A98051500063AB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4123A6021A98051500063AB9 /* dragTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dragTestTests.m; sourceTree = "<group>"; };
+		4123A60E1A9818D900063AB9 /* gibasa_namida.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gibasa_namida.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				4123A5ED1A98051500063AB9 /* ViewController.h */,
 				4123A5EE1A98051500063AB9 /* ViewController.m */,
 				4123A5F01A98051500063AB9 /* Main.storyboard */,
+				4123A60E1A9818D900063AB9 /* gibasa_namida.png */,
 				4123A5F31A98051500063AB9 /* Images.xcassets */,
 				4123A5F51A98051500063AB9 /* LaunchScreen.xib */,
 				4123A5E61A98051500063AB9 /* Supporting Files */,
@@ -199,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4123A60F1A9818D900063AB9 /* gibasa_namida.png in Resources */,
 				4123A5F21A98051500063AB9 /* Main.storyboard in Resources */,
 				4123A5F71A98051500063AB9 /* LaunchScreen.xib in Resources */,
 				4123A5F41A98051500063AB9 /* Images.xcassets in Resources */,
