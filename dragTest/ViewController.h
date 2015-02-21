@@ -19,5 +19,6 @@ UIGestureRecognizerDelegate
 - (IBAction)pinch:(id)sender;
 - (IBAction)rotation:(id)sender;
 - (IBAction)pan:(id)sender;
+
 @end
 

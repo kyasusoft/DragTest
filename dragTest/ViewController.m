@@ -27,34 +27,8 @@
 
 // gesture delegate
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    // 複数ジェスチャーの同時使用可とする
+    // 複数ジェスチャーの同時使用可とする（ポイント１）
     return YES;
-}
-
-// ピンチジェスチャー
-- (IBAction)pinch:(UIPinchGestureRecognizer *)gesture {
-    
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        // ジェスチャ開始時
-        _currentTransform = _imageView.transform;
-    }
-    // 拡大率取得
-    _scale = gesture.scale;
-    // アフィン変換を適用
-    [self applyAffain];
-}
-
-// ローテーションジェスチャー
-- (IBAction)rotation:(UIRotationGestureRecognizer *)gesture {
-    
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        // ジェスチャ開始時
-        _currentTransform = _imageView.transform;
-    }
-    // 回転角度取得
-    _angle = gesture.rotation;
-    // アフィン変換を適用
-    [self applyAffain];
 }
 
 // パンジェスチャー
@@ -71,17 +45,49 @@
     _imageView.center = _baseView.center;
 }
 
-// アファイン変換を適用
-- (void)applyAffain {
-
-    CGAffineTransform transform = CGAffineTransformConcat(CGAffineTransformConcat(_currentTransform,
-                                                                                  CGAffineTransformMakeRotation(_angle)),
-                                                          CGAffineTransformMakeScale(_scale, _scale));
-    self.imageView.transform = transform;
+// ピンチジェスチャー
+- (IBAction)pinch:(UIPinchGestureRecognizer *)gesture {
     
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        // ジェスチャ開始時
+        _currentTransform = _imageView.transform;
+    }
+    // 拡大率取得
+    _scale = gesture.scale;
+    // imageViewにアフィン変換を適用（ポイント２）
+    [self applyAffain];
     // viewの大きさを更新
     _baseView.frame = _imageView.frame;
 }
+
+// ローテーションジェスチャー
+- (IBAction)rotation:(UIRotationGestureRecognizer *)gesture {
+    
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        // ジェスチャ開始時
+        _currentTransform = _imageView.transform;
+    }
+    // 回転角度取得
+    _angle = gesture.rotation;
+    // imageViewにアフィン変換を適用（ポイント２）
+    [self applyAffain];
+    // viewの大きさを更新
+    _baseView.frame = _imageView.frame;
+}
+
+// 合成したアファイン変換をimageViewに適用（ポイント３）
+- (void)applyAffain {
+    // カレントトランスフォームにローテーションを合成
+    CGAffineTransform pichTransform = CGAffineTransformConcat(_currentTransform,
+                                                              CGAffineTransformMakeRotation(_angle));
+    // さらにスケールを合成
+    CGAffineTransform transform     = CGAffineTransformConcat(pichTransform,
+                                                              CGAffineTransformMakeScale(_scale, _scale));
+    // imageViewに適用
+    _imageView.transform = transform;
+}
+
+#pragma mark -
 
 // 位置とtransformを保存
 - (void)saveTransform {

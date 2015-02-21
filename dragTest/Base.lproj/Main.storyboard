@@ -29,6 +29,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gibasa_namida.png" translatesAutoresizingMaskIntoConstraints="NO" id="7LJ-4Z-SRA">
                                 <rect key="frame" x="45" y="170" width="230" height="233"/>
                                 <color key="backgroundColor" red="0.92411710157058713" green="0.9476628303527832" blue="0.26997428489066688" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
